@@ -22,6 +22,18 @@ body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
   color: var(--dark-color);
+  background-color: transparent; /* Transparan untuk body */
+}
+
+/* Pastikan section awal transparan */
+section {
+  background-color: transparent;
+  padding: 100px 0;
+  transition: background-color 0.5s ease;
+}
+
+/* Kelas untuk latar belakang saat scroll */
+section.visible {
   background-color: var(--light-color);
 }
 
@@ -328,15 +340,16 @@ header {
   color: var(--elegant-white);
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(230, 162, 0, 0.5);
-  animation: none; /* Stop pulsing on hover */
+  animation: none;
 }
 
 /* Sections */
-section {
-  padding: 100px 0;
+.abuabu {
+  background-color: transparent;
+  transition: background-color 0.5s ease;
 }
 
-.abuabu {
+.abuabu.visible {
   background-color: var(--light-gray);
 }
 
@@ -467,32 +480,41 @@ h3::after {
 .learn-more:hover i {
   transform: translateX(5px);
 }
-
-/* Gallery */
 .gallery-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Lebar minimum sedikit lebih besar untuk fleksibilitas */
+  gap: 25px; /* Jarak antar item untuk kesan rapi */
+  margin-top: 60px; /* Ruang atas untuk estetika */
+  padding: 0 20px; /* Padding untuk responsivitas */
 }
 
 .gallery-item {
   position: relative;
-  border-radius: 15px;
+  border-radius: 12px; /* Radius modern */
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  aspect-ratio: 4/3;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Bayangan untuk kedalaman */
+  background-color: var(--light-gray); /* Latar belakang untuk konsistensi */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi hover */
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px); /* Efek angkat saat hover */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Bayangan lebih kuat */
 }
 
 .gallery-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  height: auto; /* Biarkan tinggi menyesuaikan proporsi asli */
+  object-fit: contain; /* Menampilkan gambar secara penuh tanpa terpotong */
+  object-position: center; /* Gambar terpusat */
+  display: block; /* Menghilangkan whitespace di bawah */
+  max-height: 300px; /* Batas tinggi maksimum untuk konsistensi */
+  transition: transform 0.5s ease; /* Transisi zoom halus */
+  padding: 10px; /* Padding untuk bingkai visual */
 }
 
 .gallery-item:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05); /* Zoom lebih halus untuk estetika */
 }
 
 .gallery-caption {
@@ -501,16 +523,85 @@ h3::after {
   left: 0;
   width: 100%;
   padding: 15px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent); /* Gradien halus */
+  color: var(--elegant-white); /* Warna teks elegan */
   transform: translateY(100%);
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease-in-out; /* Transisi caption mulus */
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .gallery-item:hover .gallery-caption {
-  transform: translateY(0);
+  transform: translateY(0); /* Caption muncul saat hover */
 }
 
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Kolom lebih kecil */
+    gap: 15px;
+  }
+
+  .gallery-item img {
+    max-height: 250px; /* Mengurangi tinggi maksimum untuk layar kecil */
+    padding: 8px;
+  }
+
+  .gallery-caption {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr; /* Satu kolom untuk layar sangat kecil */
+    gap: 10px;
+  }
+
+  .gallery-item img {
+    max-height: 200px; /* Tinggi lebih kecil untuk ponsel */
+    padding: 5px;
+  }
+
+  .gallery-caption {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+}
+/* Responsivitas untuk layar kecil */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Mengurangi lebar minimum */
+    gap: 15px; /* Jarak lebih kecil di layar kecil */
+  }
+
+  .gallery-item {
+    aspect-ratio: 1/1; /* Konsisten di layar kecil */
+  }
+
+  .gallery-caption {
+    padding: 15px; /* Mengurangi padding untuk layar kecil */
+    font-size: 0.9rem; /* Menyesuaikan ukuran font */
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr; /* Satu kolom di layar sangat kecil */
+    gap: 10px;
+  }
+
+  .gallery-item {
+    border-radius: 10px; /* Radius lebih kecil untuk layar kecil */
+  }
+
+  .gallery-caption {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+}
 /* Products */
 .product-grid {
   display: grid;
