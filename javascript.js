@@ -11,7 +11,53 @@ $(document).ready(function() {
     });
   
     // GSAP Animations
-    // Animate About Us section
+    // Animate About Us section background
+    gsap.to("#tentang", {
+      scrollTrigger: {
+        trigger: "#tentang",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        onEnter: () => {
+          $("#tentang").addClass("visible");
+        }
+      }
+    });
+  
+    // Animate other sections background
+    gsap.to("#solusi", {
+      scrollTrigger: {
+        trigger: "#solusi",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        onEnter: () => {
+          $("#solusi").addClass("visible");
+        }
+      }
+    });
+  
+    gsap.to("#galeri", {
+      scrollTrigger: {
+        trigger: "#galeri",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        onEnter: () => {
+          $("#galeri").addClass("visible");
+        }
+      }
+    });
+  
+    gsap.to("#produk", {
+      scrollTrigger: {
+        trigger: "#produk",
+        start: "top 80%",
+        toggleActions: "play none none none",
+        onEnter: () => {
+          $("#produk").addClass("visible");
+        }
+      }
+    });
+  
+    // Animate About Us section content
     gsap.from("#tentang h3", {
       scrollTrigger: {
         trigger: "#tentang",
